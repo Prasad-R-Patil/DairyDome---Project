@@ -1,0 +1,103 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% load static %}
+
+<style>
+  /* Background image */
+  body {
+    background-image: url('{% static "images/background.jpg" %}');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Style for the heading */
+  h2 {
+    color: #DC143C; /* Crimson color */
+    margin-top: 2%;
+    text-align: center;
+  }
+
+  /* Style for the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2%;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2; /* Light gray background */
+  }
+
+  /* Style for buttons */
+  .button {
+    background-color: #DC143C; /* Crimson color */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background-color: #8B0000; /* Dark red color */
+  }
+
+  /* Hover effect for table rows */
+  tr:hover {
+    background-color: #f5f5f5; /* Light gray background on hover */
+  }
+</style>
+
+<center><h2>View Booking</h2></center><hr>
+<div class="container" style="margin-top:5%">
+</div>
+ <div class="container">
+   <table class="table table-bordered" id="myTable">
+     <thead>
+       <tr>
+         <th>Sr. No</th>
+         <th>Booking ID</th>
+         <th>Booking Date</th>
+         <th>Quantity</th>
+         <th>Total</th>
+         <th>Status</th>
+          
+          <th>View Product</th>
+         
+         <th>Cancel Booking</th>
+       </tr>
+     </thead>
+     <tbody>
+       {% for i in book %}
+       <tr>
+         <td>{{forloop.counter}}</td>
+         <td>{{i.booking_id}}</td>
+         <td>{{i.book_date}}</td>
+         <td>{{i.quantity}}</td>
+         <td>{{i.total}}</td>
+         <td>{{i.status.name}}</td>
+         
+         <td><a href="{% url 'booking_detail' i.booking_id i.id %}"><button class="button">Detail</button></a></td>
+         
+         <td><a href="{% url 'delete_booking' i.booking_id i.id %}" onclick="return confirm('Are you sure?')"><button class="button">Cancel</button></a></td>
+       </tr>
+       {% endfor %}
+     </tbody>
+   </table>
+ </div>
+
+{% endblock %}

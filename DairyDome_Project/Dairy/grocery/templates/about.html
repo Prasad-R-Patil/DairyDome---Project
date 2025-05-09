@@ -1,0 +1,53 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+.container {
+    margin-top: 50px;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prjdiv {
+    transition: all 0.3s ease-in-out;
+}
+
+.prjdiv:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px);
+}
+
+.about-heading {
+    text-align: center;
+    font-family: 'Monotype Corsiva', cursive;
+    color: #E6120E;
+    margin-bottom: 20px;
+}
+
+.about-content {
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.about-image {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+<div class="container">
+    <h2 class="about-heading">About Us</h2>
+    <div class="row">
+        <div class="col-sm-4 prjdiv">
+            <img src="{% static 'images/RN-297.png' %}" class="about-image" alt="Dairy Product Image">        
+        </div>
+        <div class="col-sm-8 prjdiv about-content">
+            "Welcome to Dudh Utpadak Sahkari Sanstha Maryadit Advihir [R.N :- 297], your premium dairy destination! We offer a curated selection of fresh, locally-sourced dairy products, from artisanal cheeses to farm-fresh milk. Committed to quality and sustainability, we ensure each bite is a delight. Join us and experience the goodness of nature's bounty!"
+        </div>
+    </div>
+</div>
+
+{% endblock %}

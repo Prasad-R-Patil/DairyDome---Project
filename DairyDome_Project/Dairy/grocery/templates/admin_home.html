@@ -1,0 +1,101 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+
+<style>
+    /* Background image and general styling */
+    body {
+        background-image: url('{% static "images/background.jpg" %}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        /* Add any additional background styles as needed */
+    }
+
+    /* Custom CSS */
+    .container {
+        margin-top: 10%;
+        height: 150px;
+        width: 80%;
+    }
+
+    .row {
+        height: 90%;
+    }
+
+    .prjdiv {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease-in-out;
+        border-radius: 10px;
+        background-color: #fff; /* White background */
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px; /* Space between each div */
+    }
+
+    .prjdiv:hover {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Red shadow on hover */
+        transform: translateY(-10px); /* Adjust hover effect */
+    }
+
+    .rounded {
+        border-top: 8px solid lightblue;
+        border-radius: 5px;
+    }
+
+    .glow {
+        font-size: 80px;
+        color: #fff;
+        text-align: center;
+        animation: glow 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+  
+        100% {
+            text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
+    }
+</style>
+
+<br>
+<center>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="prjdiv">
+                    <a href="{% url 'view_user' %}">
+                        <h1>Total Customer</h1>
+                        <h2 style="color:blue">{{total_customer}}</h2>
+                        <hr class="rounded">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="prjdiv">
+                    <a href="{% url 'admin_viewBooking' %}">
+                        <h1>Total Booking</h1>
+                        <h2 style="color:blue">{{total_book}}</h2>
+                        <hr class="rounded">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="prjdiv">
+                    <a href="{% url 'admin_view_product' %}">
+                        <h1>Total Product</h1>
+                        <h2 style="color:blue">{{total_pro}}</h2>
+                        <hr class="rounded">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+{% endblock %}

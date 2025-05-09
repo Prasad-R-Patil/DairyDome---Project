@@ -1,0 +1,75 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<style>
+.container {
+    margin-top: 50px;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.prjdiv {
+    transition: all 0.3s ease-in-out;
+}
+
+.prjdiv:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px);
+}
+
+.contact-heading {
+    font-family: 'Monotype Corsiva', cursive;
+    color: #E6120E;
+    font-weight: bold;
+}
+
+.contact-item {
+    margin-top: 30px;
+}
+
+.contact-item i {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.contact-item p {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+</style>
+
+<div class="container">
+    <h2 class="contact-heading">Contact Us</h2>
+    <div class="row">
+        <div class="col-sm-3 prjdiv contact-item">
+            <i class="fas fa-phone-square"></i>
+            <h4>Contact</h4>
+            <p>+91 7391873991</p>
+        </div>
+
+        <div class="col-sm-3 prjdiv contact-item">
+            <i class="fas fa-envelope"></i>
+            <h4>Email ID</h4>
+            <p>DairyDome297@gmail.com</p>
+        </div>
+
+        <div class="col-sm-3 prjdiv contact-item">
+            <i class="fas fa-address-card"></i>
+            <h4>Address</h4>
+            <p>Advihir, Motala 443103</p>
+        </div>
+
+        <div class="col-sm-3 prjdiv contact-item">
+            <i class="far fa-clock"></i>
+            <h4>Office Hours</h4>
+            <p>10:00 am to 7:00 pm</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

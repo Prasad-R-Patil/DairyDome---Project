@@ -1,0 +1,142 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+<style>
+    /* Style for the body with background image */
+    body {
+        background-image: url("{% static 'images/background.jpg' %}");
+        background-size: cover; /* Cover the entire background */
+        background-repeat: no-repeat; /* Do not repeat the background image */
+        min-height: 100vh; /* Ensure full height of viewport */
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* Default font */
+        color: #333; /* Default text color */
+    }
+
+    /* Style for the container */
+    .container {
+        margin-top: 20px;
+        background-color: rgba(255, 255, 255, 0.8); /* Add transparency to container */
+        padding: 10px; /* Reduce padding */
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+        max-width: 600px; /* Limit maximum width */
+        margin: auto; /* Center the container */
+    }
+
+    /* Style for the heading */
+    h2 {
+        text-align: center;
+        color: #007bff; /* Blue heading color */
+        margin-top: 20px;
+    }
+
+    /* Style for the rows */
+    .row {
+        margin-bottom: 10px;
+    }
+
+    /* Style for strong tags */
+    strong {
+        font-weight: bold;
+    }
+
+    /* Style for images */
+    img {
+        border-radius: 50%; /* Rounded profile picture */
+        border: 2px solid #007bff; /* Blue border */
+    }
+
+    /* Style for the edit button */
+    .btn-primary {
+        background-color: #007bff; /* Blue button color */
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s; /* Add transition for hover effect */
+        width: 100%;
+    }
+
+    .btn-primary:hover {
+        background-color: #dc3545; /* Red color on hover */
+    }
+</style>
+
+
+<div class="container">
+    <h2>View Profile</h2>
+    <hr>
+
+    <div class="container-fluid">
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Full Name:</strong>
+            </div>
+            <div class="col-md-6">
+                {{pro.user.first_name}} {{pro.user.last_name}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Customer Pic:</strong>
+            </div>
+            <div class="col-md-6">
+                <img src="{{pro.image.url}}" style="width:150px;height:150px">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Email Id :</strong>
+            </div>
+            <div class="col-md-6">
+                {{pro.user.email}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Contact :</strong>
+            </div>
+            <div class="col-md-6">
+                {{pro.contact}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Date of Birth :</strong>
+            </div>
+            <div class="col-md-6">
+                {{pro.dob}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>City :</strong>
+            </div>
+            <div class="col-md-6">
+                {{pro.city}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <strong>Address :</strong>
+            </div>
+            <div class="col-md-6">
+                {{pro.address}}
+            </div>
+        </div>
+        <hr>
+        <a href="{% url 'edit_profile' %}">
+            <button class="btn btn-primary" style="margin-bottom:5%">Edit Profile</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

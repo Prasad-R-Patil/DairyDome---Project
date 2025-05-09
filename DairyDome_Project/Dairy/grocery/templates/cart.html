@@ -1,0 +1,84 @@
+{% extends 'navigation.html' %}
+{% block body %}
+<style>
+.container {
+    margin-top: 50px;
+}
+
+.cart-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: scale(1.05);
+}
+
+.btn-continue-shopping:hover,
+.btn-buy-now:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.total-btn {
+    cursor: default;
+}
+</style>
+
+<center><h2 style="color:red;margin-top:2%">View Cart</h2></center><hr>
+
+{% if not cart %}
+<h1 align="center" style="color:blue">{{ message }}</h1>
+{% else %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <center><a href="{% url 'view_product' 0 %}" class="btn btn-lg btn-info text-light text-capitalize btn-continue-shopping"><i class="fas fa-shopping-bag"></i> Continue Shopping</a></center>
+        </div>
+        <div class="col-md-4">
+            <center><a href="{% url 'booking' book %}" class="btn btn-lg btn-success text-light text-capitalize btn-buy-now"><i class="fas fa-shopping-cart"></i> Buy Now</a></center>
+        </div>
+        <div class="col-md-4">
+            <center><a class="btn btn-lg btn-dark text-light text-capitalize total-btn" disabled>Total : Rs. {{ total }}</a></center>
+        </div>
+    </div>
+</div>
+
+{% for item in cart %}
+<div class="container cart-item">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width: 100px; height: 100px; border-radius: 50%;">
+        </div>
+        <div class="col-md-6">
+            <h4>{{ item.product.name }}</h4>
+            <p>Price: Rs. {{ item.product.price }}</p>
+            <p>{{ item.product.desc }}</p>
+        </div>
+        <div class="col-md-3">
+            <a href="{% url 'remove_cart' item.id %}" class="btn btn-sm btn-danger text-light text-capitalize"><i class="fas fa-trash"></i> Remove</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <center><a href="{% url 'view_product' 0 %}" class="btn btn-lg btn-info text-light text-capitalize btn-continue-shopping"><i class="fas fa-shopping-bag"></i> Continue Shopping</a></center>
+        </div>
+        <div class="col-md-4">
+            <center><a href="{% url 'booking' book %}" class="btn btn-lg btn-success text-light text-capitalize btn-buy-now"><i class="fas fa-shopping-cart"></i> Buy Now</a></center>
+        </div>
+        <div class="col-md-4">
+            <center><a class="btn btn-lg btn-dark text-light text-capitalize total-btn" disabled>Total : Rs. {{ total }}</a></center>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

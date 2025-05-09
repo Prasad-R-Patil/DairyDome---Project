@@ -1,0 +1,90 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% load static %}
+
+{% ifequal error "yes" %}
+<script>
+    alert('Logged in successfully');
+    window.location=('{% url 'admin_home' %}');
+</script>
+{% endifequal %}
+{% ifequal error "not" %}
+<script>
+    alert('Username & Password do not match');
+</script>
+{% endifequal %}
+
+<style>
+    /* Custom CSS */
+    body {
+        background-image: url("{% static 'images/milk.jpg' %}"); 
+    
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: Arial, sans-serif;
+        color: white; /* Set text color to white */
+    }
+
+    .container {
+        width: 50%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5); /* Transparent background for the form */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .form-group label {
+        color: white; /* Set label color to white */
+        font-weight: bold;
+    }
+
+    .form-control {
+        border: 1px solid white; /* Set input border color to white */
+        border-radius: 5px;
+        color: black; /* Set input text color to black */
+        background-color: rgba(255, 255, 255, 0.8); /* Set input background color with opacity */
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .mybtnone:hover {
+        background-color: #E40203;
+    }
+</style>
+
+<div class="container">
+    <h2>Admin Login Form</h2>
+    <hr>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="uname" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pwd">
+        </div>
+        <button type="submit" class="btn btn-primary mybtnone">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

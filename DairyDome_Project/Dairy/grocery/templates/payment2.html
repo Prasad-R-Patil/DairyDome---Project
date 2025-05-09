@@ -1,0 +1,103 @@
+{% extends 'navigation.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="text-center mt-5">
+        <h3 style="color: red;">PAYMENT DETAIL</h3>
+        <hr>
+    </div>
+    <div class="jumbotron bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img class="rounded-circle img-fluid payment-image" src="{% static 'images/masterCard.jpg' %}">
+                </div>
+                <div class="col-md-4 text-center">
+                    <img class="rounded-circle img-fluid payment-image" src="{% static 'images/visa.jpg' %}">
+                </div>
+                <div class="col-md-4 text-center">
+                    <img class="rounded-circle img-fluid payment-image" src="{% static 'images/rupay.png' %}">
+                </div>
+            </div>
+            <form action="{% url 'view_booking' %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="cardNumber">CARD NUMBER</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><ion-icon name="card"></ion-icon></span>
+                                </div>
+                                <input type="tel" class="form-control" name="cardnumber" placeholder="Valid Card Number" autocomplete="cc-number" required autofocus>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cardExpiry">EXPIRY DATE</label>
+                            <input type="tel" class="form-control" name="cardex" placeholder="MM / YY" autocomplete="cc-exp" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cardCVC">CVC CODE</label>
+                            <input type="tel" class="form-control" name="cvc" placeholder="CVC" autocomplete="cc-csc" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="cardCVC">Card Holder Name</label>
+                            <input type="text" class="form-control" name="cardname" placeholder="Card Holder Name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="couponCode">Amount In Rs.</label>
+                            <input type="text" class="form-control" value="{{ total }}" name="amount" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block hover-effect" name="payment" value="Payment">
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{% url 'view_booking' %}" class="btn btn-success btn-lg btn-block hover-effect"><h6>Cash On Delivery</h6></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% if error %}
+<script>
+    alert('Booking order Successfully');
+    window.location="{% url 'view_booking' %}";
+</script>
+{% endif %}
+
+<style>
+.hover-effect {
+    transition: all 0.3s ease-in-out;
+}
+
+.hover-effect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.payment-image {
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Adjust size as needed */
+    object-fit: cover;
+}
+</style>
+
+{% endblock %}

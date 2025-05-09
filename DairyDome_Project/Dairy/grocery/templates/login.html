@@ -1,0 +1,114 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% load static %}
+
+{% if error == "yes" %}
+<script>
+    alert('Logged in successfully');
+    window.location.href = ("{% url 'home' %}");
+</script>
+{% endif %}
+{% if error == "not" %}
+<script>
+    alert('Username & Password do not match');
+</script>
+{% endif %}
+
+<style>
+    /* Custom CSS */
+    body {
+        background-image: url("{% static 'images/milk.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-family: 'Roboto', sans-serif;
+        color: white; /* Set text color to white */
+    }
+
+    .container {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 50px;
+        background-color: rgba(0, 0, 0, 0.5); /* Transparent background for the form */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .form-group label {
+        color: white; /* Set label color to white */
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+        padding: 10px;
+        color: black; /* Set input text color to black */
+        background-color: rgba(255, 255, 255, 0.8); /* Set input background color with opacity */
+    }
+
+    .btn-primary {
+        background-color: #28a745;
+        border: none;
+        font-weight: 700;
+        padding: 10px 20px;
+    }
+
+    .btn-primary:hover {
+        background-color: #218838;
+    }
+
+    .btn-primary a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .mybtnone:hover {
+        background-color: #dc3545;
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
+    .login-footer a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+    <h2>User Login Form</h2>
+    <hr>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="uname" placeholder="Enter Username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pwd">
+        </div>
+        <button type="submit" class="btn btn-primary mybtnone">Login</button>
+        <a href="{% url 'signup' %}" class="btn btn-primary mybtnone">Signup</a>
+    </form>
+
+    <div class="login-footer">
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
+    </div>
+</div>
+
+{% endblock %}

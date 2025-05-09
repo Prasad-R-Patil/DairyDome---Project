@@ -1,0 +1,98 @@
+{% extends 'navigation.html' %}
+{% block body %}
+{% load static %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        color: #333;
+        background-image: url("{% static 'images/background.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .form-container {
+        width: 70%;
+        margin: 10% auto;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto; /* Center the button */
+    }
+
+    .btn-primary:hover {
+        background-color: #dc3545; /* Red color on hover */
+    }
+</style>
+
+<div class="container">
+    <h2>Add Product</h2>
+    <hr>
+    <div class="form-container">
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Product Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Product Name" name="pname" id="inputEmail4">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Product Image</label>
+                    <input type="file" class="form-control" id="exampleInputPassword1" name="img">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputState">Category</label>
+                    <select id="inputState" class="form-control" name="cat">
+                        {% for i in cat %}
+                            <option value="{{i.name}}">{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Product Price</label>
+                    <input type="number" class="form-control" name="price" placeholder="Enter Price" id="inputEmail4">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% if error %}
+<script>
+    alert('1 Product Added Successfully');
+</script>
+{% endif %}
+{% endblock %}

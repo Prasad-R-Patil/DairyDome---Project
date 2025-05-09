@@ -1,0 +1,75 @@
+{% extends 'navigation.html' %}
+{% block body %}
+<style>
+    .container {
+        margin-top: 5%;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+    }
+
+    .button {
+        background-color: #f44336; /* Red button color */
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 2px 0px;
+        transition: background-color 0.3s; /* Add transition for hover effect */
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background-color: #28a745; /* Green color on hover */
+    }
+</style>
+
+<center><h2 style="color:red;margin-top:2%">View Category</h2></center>
+<hr>
+<div class="container">
+    <table class="table table-bordered" id="myTable">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in pro %}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>
+                    <a href="{% url 'delete_category' i.id %}" onclick="return confirm('Are you sure?')">
+                        <button class="button button1">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if error %}
+<script>
+    alert('1 Product Deleted Successfully');
+    window.location("{% url 'view_feedback' %}");
+</script>
+{% endif %}
+
+{% endblock %}

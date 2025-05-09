@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedback</title>
+    <style>
+        body {
+            background-image: url('/static/images/background.jpg'); /* Add your background image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 5%;
+        }
+        h2 {
+            color: red;
+            text-align: center;
+            margin-top: 2%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+{% extends 'navigation.html' %}
+{% block body %}
+{% if error %}
+<script>
+    alert('1 Product Deleted Successfully');
+    window.location("{% url 'view_feedback' %}");
+</script>
+{% endif %}
+<h2>View Feedback</h2>
+<hr>
+<div class="container">
+
+<table class="table table-bordered" id="myTable">
+  <thead>
+  <tr>
+    <th>Username</th>
+    <th>Contact Number</th>
+      <th>Email Id</th>
+    <th>Date</th>
+      <th>Message</th>
+    <th>Remove</th>
+  </tr>
+  </thead>
+   <tbody>
+
+    {% for i in feed %}
+
+  <tr>
+
+    <td>{{i.profile.user.username}}</td>
+    <td>{{i.profile.contact}}</td>
+      <td>{{i.profile.user.email}}</td>
+      <td>{{i.date}}</td>
+      <td>
+          <span id="message_{{forloop.counter}}" class="message-preview">{{ i.message1|truncatewords:20 }}</span>
+          <span id="full_message_{{forloop.counter}}" class="full-message" style="display: none;">{{ i.message1 }}</span>
+          {% if i.message1|wordcount > 20 %}
+              <button class="read-more-button" onclick="showFullMessage({{forloop.counter}})">Read More</button>
+          {% endif %}
+      </td>
+      <td><a href="{% url 'delete_feedback' i.id %}" onclick="return confirm('Are you sure?')"><button class="button">Delete</button></a></td>
+
+  </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+
+</div>
+
+<script>
+    function showFullMessage(index) {
+        document.getElementById("message_" + index).style.display = "none";
+        document.getElementById("full_message_" + index).style.display = "inline";
+        document.getElementsByClassName("read-more-button")[index-1].style.display = "none";
+    }
+</script>
+
+{% endblock %}
+</body>
+</html>

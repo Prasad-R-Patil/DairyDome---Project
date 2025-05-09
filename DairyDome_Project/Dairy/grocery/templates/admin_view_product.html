@@ -1,0 +1,102 @@
+{% extends 'navigation.html' %}
+{% block extra_css %}
+<style>
+    /* Custom CSS for product table */
+    body {
+        background-image: url('/static/images/background.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .container {
+        margin-top: 4%;
+    }
+
+    #myTable {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #myTable th,
+    #myTable td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #myTable th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    #myTable tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .button {
+        background-color: #f44336; /* Red */
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .button:hover {
+        background-color: #a7f708; /* Lighter shade of red */
+    }
+
+    /* Adjust the shape of the button */
+    .button:hover {
+        border-radius: 50%; /* Change the shape to a circle */
+    }
+
+    /* Apply hover effect to surrounding buttons */
+    .button:hover ~ .button {
+        background-color: #1308f3; /* Red */
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<center>
+    <h2 style="color: red; margin-top: 2%">View Product</h2>
+</center>
+<hr>
+<div class="container">
+    <table class="table table-bordered" id="myTable">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in pro %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td class="image-column"><img src="{{ product.image.url }}" style="width: 50px; height: 50px;"></td>
+                <td>{{ product.category.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.desc }}</td>
+                <td>
+                    <a href="{% url 'delete_product' product.id %}" onclick="return confirm('Are you sure?')">
+                        <button class="button">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
